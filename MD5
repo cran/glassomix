@@ -1,0 +1,9 @@
+28ad8f20d26bb18702686c9a7fc8f1b1 *DESCRIPTION
+df390c53434517b304ac5db487184641 *NAMESPACE
+e6d1c484b417bd11454c4efed0c86246 *R/glassomix.R
+b291f3182ee7eebe666bb87b9bd12cba *man/glasso.mix.Rd
+31b5b2142c192a4a516d4a179dc1a34d *man/glassomix-package.Rd
+4fdee7a73a0cb74a56dbe2ffdb762c36 *man/gm.plot.Rd
+cb5febec2e8c4bd5ed333a097c734105 *man/gm.select.Rd
+1aa7d63f33f4403de45fb4fd29d5736e *man/summary.glasso.mix.Rd
+9a312fec717d8132ce442749f47bb4fc *man/summary.gm.select.Rd
