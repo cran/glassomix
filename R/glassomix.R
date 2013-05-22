@@ -3,8 +3,7 @@
 ####################################################
 # Inference via EM algorithm
 ####################################################
-glasso.mix <- function(data,K=NULL,lambda=NULL,em.iter,n.lambda,
-                        penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax){
+glasso.mix <- function(data,K=NULL,lambda=NULL,em.iter,n.lambda,penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax){
 	# data = data matrix (rows = n, number of replicates
 	#                  cols = p, number of graph nodes/variables)
 	# K = number of mixtures
@@ -181,7 +180,7 @@ summary.glasso.mix<-function(object,...){
   #clusters: The individial clustering
 
 ###################################################################################################################
-gm.select<-function(ret){
+select.gm<-function(ret){
     cl=NULL   ## the class of the elelements of the sample
     #ret=glasso.mix(data,K=NULL,lambda=NULL,em.iter,n.lambda,penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax)
     lambda<-ret$lambda
@@ -206,14 +205,14 @@ gm.select<-function(ret){
   output<-list(n.cluster=n.cluster,eBIC=EBICklambda, lambda_eBIC=lambda_eBIC,Th.Pen= ret$res[[n.cluster]]$Theta_Pen[[lambda_index]],Th.NPen= ret$res[[n.cluster]]$Theta_NonPen[[lambda_index]],
   Pi_ind=ret$res[[n.cluster]]$pi.ind[[lambda_index]],Pi=Pi,clusters=cl,Pen_LogLik=ret$res[[n.cluster]]$loglik[lambda_index], NPen_LogLik=ret$res[[n.cluster]]$naiveloglik[lambda_index],lambda=lambda)
 
-  class(output) <- "gm.select"
+  class(output) <- "select.gm"
   return(output)
 
 }
 
 
 ################     summary of the result according to gm.select ###############
-summary.gm.select<-function(object,...){
+summary.select.gm<-function(object,...){
   mix_comp<-object$n.cluster
   lambda_eBIC<-object$lambda_eBIC
   clustering<-object$clusters
@@ -235,6 +234,11 @@ gm.plot<-function(output) {
       g1<-1*(abs(net[,,k])>0.01)
       g1 <- graph.adjacency(g1,mode = "undirected" )
       plot.igraph(g1, layout = layout.circle, main = "network")
-      
+
     }
 }
+
+##########   END ###############################################################################
+
+
+

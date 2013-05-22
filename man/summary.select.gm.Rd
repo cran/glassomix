@@ -1,26 +1,39 @@
-\name{gm.plot}
-\alias{gm.plot}
+\name{summary.select.gm}
+\alias{summary.select.gm}
 \title{
- Graphical plot  of the K- Networks
+  Summary  according to the model selection function ``select.gm''
 }
 \description{
-Plots the K- graphical precision matrices corresponding to the optimum EBIC.
+Summary of the result according to ``select.gm''
 }
 \usage{
-gm.plot(output)
+\method{summary}{select.gm}(object,...) 
 }
 
 \arguments{
-  \item{output}{
-It is a list which is the result of ``select.gm''  function.
-}
-  
+  \item{object}{
+an object with S3 class ``select.gm''. A list of the result from the ``select.gm'' function.
 }
 
+\item{\dots}{
+system reserved (no specific usage).
+}
+
+}
 \details{
-It shows the graphical representation (dependencies ) of the p-variables in each cluster.
+It gives summary of output from  ``select.gm''.
 }
 
+
+\value{
+The details of the output components are as follows:
+  \item{ mix_comp }{Optimal number of clusters mixture components  K.}
+  \item{lambda_eBIC}{Optimum lambda value based on EBIC.}
+  \item{clustering}{( \eqn{n \times 1}{n x 1}) vector containing the indices of the clusters where the data points are assigned to.}
+  \item{mix_prop}{Optimum (K) mixture proportions.}
+  
+   
+}
 
 \references{
 1.  Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
@@ -31,7 +44,7 @@ Computations for the Graphical Lasso. \emph{Journal of Computational and Graphic
 20(4), 892-900
 
 3.  Pan, Wei and Shen, Xiaotong (2007). Penalized Model-Based Clustering with Application to Variable Selection
-\emph{J. Mach. Learn}. Res. 8(1532-4435).
+\emph{J. Mach. Learn}. Res. 8(1532-4435), (1145--1164)
 
 4.  C. Fraley, A. E. Raftery, T. B. Murphy and L. Scrucca (2012).
   mclust Version 4 for R: Normal Mixture Modeling for Model-Based 
@@ -44,12 +57,11 @@ Anani Lotsi and Ernst Wit
 
 \seealso{
   \code{\link{glasso.mix}},
-  \code{\link{summary.glasso.mix}},
-  \code{\link{select.gm}}, 
-   \code{\link{summary.select.gm}}
+  \code{\link{summary.glasso.mix}}, 
+  \code{\link{select.gm}},  
+  \code{\link{gm.plot}}
   }
 \examples{
-#generate data 
 p<-10          ## Number of observations
 n<-100         ## Number of nodes
 
@@ -68,10 +80,8 @@ for (i in 1:n){
 	}
 }
 ret=glasso.mix(x,K=NULL,lambda=NULL,em.iter=5,n.lambda=2,
-               penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax=3)        
-                  
-                  
+               penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax=3)   
 output=select.gm(ret)
-graph=gm.plot(output)
+summary.select.gm(output)
 }
 

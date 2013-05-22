@@ -3,50 +3,50 @@
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-EM algorithm  for a parameterized sparse Gaussian graphical mixture model.
+ sparse Gaussian undirected graphical mixture model estimation.
 }
 \description{
-This function perfoms the inference via EM algorithm. This function for each value 
+The main function perfoming the inference via EM algorithm. This function for each value 
 of K, estimate the responsibility matrices ( \eqn{n \times K}{n x K}) at the E-step 
-and then given these probabilities,  res-estimate the precision matrices at the M-step 
+and then given these probabilities, estimate the precision matrices at the M-step 
 via glasso.
 }
 \usage{
 glasso.mix(data,K=NULL,lambda=NULL,em.iter,n.lambda,
-                penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax)
+           penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
-It is a matrix of the data ( \eqn{n \times p}{n x p} matrix) 
-        rows = n, number of replicates, 
+ ( \eqn{n \times p}{n x p}),  
+        rows = n, number of observation, 
         columns = p, number of graph nodes/variables).
 }
   \item{K}{
-Number of mixture components. A sequence of integers denoting the numbers of mixture components (clusters) for which the EBIC is to be calculated. Generaly it is a sequence of 2, 3,...whose lenght should equal the length of lambda+1
-}
+ A sequence of integers denoting the numbers of mixture components (clusters) for which  EBIC is to be calculated. 
+ }
   \item{lambda}{
-(Non-negative) regularization parameter for glasso. lambda=0 means no regularization. Can be a scalar  or a vector. 
+(Non-negative) regularization parameter for glasso. lambda=0 means no regularization. It could be a scalar  or a vector. 
 }
   \item{em.iter}{
-The maximun number of EM iteration. Usually the convergence is faster.
+The maximun number of EM iteration. 
 }
   \item{n.lambda}{
 The length of the tuning parameter lambda.
 }
   \item{penalize.diagonal}{
-Should diagonal of precision matrice be penalized? Dafault FALSE.
+Should diagonal of precision matrice be penalized? Dafault is FALSE.
 }
   \item{ebic.gamma}{
 The Extended Bayesian Information Criteria paremeter, usually  ebic.gamma is between 0 and 1. 
 }
   \item{Kmax}{
-The maximum number of K 
+The maximum number of K. 
 }
 }
 \details{
- Implements the EM algorithm for a parameterized Gaussian graphical mixture model accross K for each of the regularization parameters,
-  starting with the expectation step.
+ Implements the EM algorithm for a parameterized Gaussian graphical mixture models accross K for each of the regularization parameters.
+ 
 }
 
 \value{
@@ -113,17 +113,17 @@ The details of the output components are as follows:
 
 }
 \references{
-Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
-arXiv:1210.5371. \url{http://arxiv.org/abs/1210.5371}
+1.  Anani, Lotsi. and E. Wit (2013). High dimensional sparse Gaussian graphical model.
+(to be published)
 
-Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
+2.  Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
 Computations for the Graphical Lasso. \emph{Journal of Computational and Graphical Statistics}.
 20(4), 892-900
 
-Pan, Wei and Shen, Xiaotong (2007). Penalized Model-Based Clustering with Application to Variable Selection
-\emph{J. Mach. Learn}. Res. 8(1532-4435), (1145--1164)
+3.  Pan, Wei and Shen, Xiaotong (2007). Penalized Model-Based Clustering with Application to Variable Selection
+\emph{J. Mach. Learn}. Res. 8(1532-4435).
 
-C. Fraley, A. E. Raftery, T. B. Murphy and L. Scrucca (2012).
+4.  C. Fraley, A. E. Raftery, T. B. Murphy and L. Scrucca (2012).
   mclust Version 4 for R: Normal Mixture Modeling for Model-Based 
   Clustering, Classification, and Density Estimation. 
   Technical Report No. 597, Department of Statistics, University of Washington.
@@ -132,43 +132,22 @@ C. Fraley, A. E. Raftery, T. B. Murphy and L. Scrucca (2012).
 Anani Lotsi and Ernst Wit
 }
 \seealso{
- \code{\link{summary.glasso.mix}},
-  \code{\link{gm.select}}, 
-   \code{\link{summary.gm.select}},
+  \code{\link{summary.glasso.mix}},
+  \code{\link{select.gm}}, 
+   \code{\link{summary.select.gm}},
   \code{\link{gm.plot}}
-   
   }
 
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-require(mvtnorm)
-require(glasso)
-require(igraph)
-# Generate simulation data
-p<-10   #number of graph nodes/variables             
-Th1<-diag(p)
-d=1
-for (i in 1:p){
-	for (j in 1:p){
-		if ((abs(i-j)==d)|((i-j)/p ==d)|((j-i)/p==d)){
-			Th1[i,j]=-0.4
-		}
-	}
-}	
-Th2<-diag(p)
-d=2
-for (i in 1:p){
-	for (j in 1:p){
-		if ((abs(i-j)==d)|((i-j)/p ==d)|((j-i)/p==d)){
-			Th2[i,j]=-0.4
-		}
-	}
-}	
+#generate data 
+p<-10          ## Number of observations
+n<-100         ## Number of nodes
 
-n<-50   # number of replicates   
-pi1 <- 0.15
+L1 = huge.generator(n = n, d = p, vis = FALSE, graph = "random")
+L2 = huge.generator(n = n, d = p, vis = FALSE, graph = "random")
+Th1<-L1$sigma  ## Precision matrix from graph1
+Th2<-L2$sigma   ## Precision matrix from graph2
+pi1 <- 0.5
 z<-rbinom(n,1,pi1)
 x<-NULL
 for (i in 1:n){
@@ -178,9 +157,10 @@ for (i in 1:n){
 		x<-rbind(x,rmvnorm(1,rep(0,p),solve(Th2)))
 	}
 }
-ret=glasso.mix(x,K=NULL,lambda=NULL,em.iter=5,n.lambda=2,
-                  penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax=3)
 
+## Output from the main function
+ret=glasso.mix(x,K=NULL,lambda=NULL,em.iter=5,n.lambda=2,
+               penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax=3)
 }
 
 

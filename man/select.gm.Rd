@@ -1,16 +1,16 @@
-\name{gm.select}
-\alias{gm.select}
+\name{select.gm}
+\alias{select.gm}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ High dimensional sparse Gaussian graphical mixture model
+\title{ High dimensional sparse Gaussian graphical mixture model selection
 
 }
 \description{
-This function performs the model selection and select the  optimal model according to Extended Bayesian Information Criterin (EBIC) for EM- algorithm for parameterized High dimensional 
-sparse Gaussian graphical mixture models. The function etimates the optimun number of mixture components i.e number of clusters and the regularization parameter lambda.
+This function  selects the  optimal model according to Extended Bayesian Information Criterin (EBIC) for EM- algorithm for parameterized High dimensional 
+sparse Gaussian graphical mixture models. The function etimates the optimun number of mixture components and the regularization parameter lambda.
 }
 \usage{
-gm.select(ret)
+select.gm(ret)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,8 +24,8 @@ Gaussian graphical mixture model accross K for each of the regularization parame
 }
 \value{
 The details of the output components are as follows:
-  \item{n.cluster }{Optimal number of clusters mixture components  K.}
-  \item{eBIC }{All EBIC values. This is a matrix with row equals maximun number of mixtures minus one; (Kmax-1) and  column equals n.lambda.}
+  \item{n.cluster }{Optimal number of clusters or mixture components  K.}
+  \item{eBIC }{All EBIC values. This is a matrix with row equals maximun number of mixtures minus one; (Kmax-1) and  column equals to n.lambda.}
   \item{lambda_eBIC}{Optimum lambda value based on EBIC.}
   \item{Th.Pen}{Optimum penalized K precision matrices.}
   \item{Th.NPen}{Optimum non-penalized K precision matrices.}
@@ -38,17 +38,17 @@ The details of the output components are as follows:
    
 }
 \references{
-Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
-arXiv:1210.5371. \url{http://arxiv.org/abs/1210.5371}
+1.  Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
+(to be published)
 
-Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
+2.  Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
 Computations for the Graphical Lasso. \emph{Journal of Computational and Graphical Statistics}.
 20(4), 892-900
 
-Pan, Wei and Shen, Xiaotong (2007). Penalized Model-Based Clustering with Application to Variable Selection
-\emph{J. Mach. Learn}. Res. 8(1532-4435), (1145--1164)
+3.  Pan, Wei and Shen, Xiaotong (2007). Penalized Model-Based Clustering with Application to Variable Selection
+\emph{J. Mach. Learn}. Res. 8(1532-4435).
 
-C. Fraley, A. E. Raftery, T. B. Murphy and L. Scrucca (2012).
+4.  C. Fraley, A. E. Raftery, T. B. Murphy and L. Scrucca (2012).
   mclust Version 4 for R: Normal Mixture Modeling for Model-Based 
   Clustering, Classification, and Density Estimation. 
   Technical Report No. 597, Department of Statistics, University of Washington.
@@ -58,45 +58,24 @@ Anani Lotsi and Ernst Wit
 }
 
 \seealso{
-  \code{\link{glasso.mix}}, 
-    \code{\link{summary.glasso.mix}},
-     \code{\link{summary.gm.select}},
+ \code{\link{glasso.mix}},
+  \code{\link{summary.glasso.mix}},
+   \code{\link{summary.select.gm}},
   \code{\link{gm.plot}}
  
   }
     
 \examples{
-require(mvtnorm)
-require(glasso)
-require(igraph)
-# Generate simulation data
-p<-10   #number of graph nodes/variables             
+#generate data 
+p<-10          ## Number of observations
+n<-100         ## Number of nodes
 
-Th1<-diag(p)
-d=1
-for (i in 1:p){
-	for (j in 1:p){
-		if ((abs(i-j)==d)|((i-j)/p ==d)|((j-i)/p==d)){
-			Th1[i,j]=-0.4
-		}
-	}
-}
-	
-Th2<-diag(p)
-d=2
-for (i in 1:p){
-	for (j in 1:p){
-		if ((abs(i-j)==d)|((i-j)/p ==d)|((j-i)/p==d)){
-			Th2[i,j]=-0.4
-		}
-	}
-}
-	
-
-n<-50   # number of replicates   
-pi1 <- 0.15
+L1 = huge.generator(n = n, d = p, vis = FALSE, graph = "random")
+L2 = huge.generator(n = n, d = p, vis = FALSE, graph = "random")
+Th1<-L1$sigma  ## Precision matrix from graph1
+Th2<-L2$sigma   ## Precision matrix from graph2
+pi1 <- 0.5
 z<-rbinom(n,1,pi1)
-
 x<-NULL
 for (i in 1:n){
 	if (z[i]==1){
@@ -105,9 +84,9 @@ for (i in 1:n){
 		x<-rbind(x,rmvnorm(1,rep(0,p),solve(Th2)))
 	}
 }
-
 ret=glasso.mix(x,K=NULL,lambda=NULL,em.iter=5,n.lambda=2,
-                  penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax=3)
-output=gm.select(ret)
+               penalize.diagonal=TRUE,ebic.gamma=0.5,Kmax=3)        
+               
+output=select.gm(ret)
 }
 
