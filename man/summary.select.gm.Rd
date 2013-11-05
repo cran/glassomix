@@ -27,17 +27,17 @@ It gives summary of output from  ``select.gm''.
 
 \value{
 The details of the output components are as follows:
-  \item{ mix_comp }{Optimal number of clusters mixture components  K.}
-  \item{lambda_eBIC}{Optimum lambda value based on EBIC.}
+  \item{ mix.comp }{Optimal number of clusters.}
+  \item{lambda.eBIC}{Optimum lambda value based on EBIC.}
   \item{clustering}{( \eqn{n \times 1}{n x 1}) vector containing the indices of the clusters where the data points are assigned to.}
-  \item{mix_prop}{Optimum (K) mixture proportions.}
+  \item{mix.prop}{Optimum  mixture proportions.}
   
    
 }
 
 \references{
-1.  Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
-(to be published)
+1.  Anani, Lotsi. and E. Wit (2013). High dimensional sparse Gaussian graphical model.
+(http://arxiv.org/abs/1308.3381)
 
 2.  Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
 Computations for the Graphical Lasso. \emph{Journal of Computational and Graphical Statistics}.

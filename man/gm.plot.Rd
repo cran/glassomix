@@ -1,10 +1,10 @@
 \name{gm.plot}
 \alias{gm.plot}
 \title{
- Graphical plot  of the K- Networks
+ Graphical plot  of the K Networks
 }
 \description{
-Plots the K- graphical precision matrices corresponding to the optimum EBIC.
+Plots the K graphical precision matrices corresponding to the optimum EBIC.
 }
 \usage{
 gm.plot(output)
@@ -23,8 +23,9 @@ It shows the graphical representation (dependencies ) of the p-variables in each
 
 
 \references{
-1.  Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
-(to be published)
+1.  Anani, Lotsi. and E. Wit (2013). High dimensional sparse Gaussian graphical model.
+(http://arxiv.org/abs/1308.3381)
+
 
 2.  Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
 Computations for the Graphical Lasso. \emph{Journal of Computational and Graphical Statistics}.

@@ -1,9 +1,9 @@
-04d1af8d0ccf54abd3509b08acdaba13 *DESCRIPTION
+6b0d26e2f3f74685a9f1e7148b7a36e8 *DESCRIPTION
 df390c53434517b304ac5db487184641 *NAMESPACE
-38d692c2c917e8db5c0809bc26d8921c *R/glassomix.R
-20a9bfc6f075013c3d401a4f72f06fd6 *man/glasso.mix.Rd
-969f530097e8f05980839bf1b8a09867 *man/glassomix-package.Rd
-d4410ad8faa5ce465aa147ae2aa9c2f5 *man/gm.plot.Rd
-34fdfca637f4d2e265d9361f66ca44c2 *man/select.gm.Rd
-502b6f78c0096b7bc766a5521e07da9c *man/summary.glasso.mix.Rd
-ee3f5c6d29d545ef0cb8908a21280f66 *man/summary.select.gm.Rd
+7ef7334f412cb1214693a4af1ceeb2ce *R/glassomix.R
+59e72b2fa1c55b7cfba1bad48ebbb062 *man/glasso.mix.Rd
+eed3059bed2e461ae3c0013168743395 *man/glassomix-package.Rd
+d29d996d2937670aece133395c6f7e03 *man/gm.plot.Rd
+d6338f202952ee799453de8e0e40c37e *man/select.gm.Rd
+51c8104599880dd7418bf56959067a30 *man/summary.glasso.mix.Rd
+ca33f04d4bb28ac2df37b9725b9ff99d *man/summary.select.gm.Rd

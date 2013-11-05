@@ -141,7 +141,7 @@ glasso.mix <- function(data,K=NULL,lambda=NULL,em.iter,n.lambda,penalize.diagona
       bestlambda.ebic<-lambda[which.min(EBIC)]
       bestpi.ebic<- pi[[which.min(EBIC)]]
       res[[K]]<-list(loglik=NPLik.lambda,naiveloglik=naiveNPLik.lambda,n.par=param, bestlambda.ebic= bestlambda.ebic,
-                besttheta.ebic=besttheta.ebic,bestpi.ebic=bestpi.ebic,Theta_Pen=Th.lambda,Theta_NonPen=ThNP.lambda,pi.ind=pi.i,pi=pi,EBIC=EBIC)
+                besttheta.ebic=besttheta.ebic,bestpi.ebic=bestpi.ebic,Theta.Pen=Th.lambda,Theta.NonPen=ThNP.lambda,pi.ind=pi.i,pi=pi,EBIC=EBIC)
       ret<-list(res=res,lambda=lambda,Kmax=Kmax,n.lambda=n.lambda,data=data)
    } ############# END of K
    class(ret) <- "glasso.mix"
@@ -149,7 +149,7 @@ return(ret)
 }
 
 
-######################### Summary functioni based on  glasso.mix. Reduced summary from glasso.mix   #####################################
+######################### Summary function based on  glasso.mix. Reduced summary from glasso.mix   #####################################
 
 summary.glasso.mix<-function(object,...){
   pi<-NULL
@@ -202,8 +202,8 @@ select.gm<-function(ret){
         cl[a]<-which.max(Pi_ind[a,])
    }
 
-  output<-list(n.cluster=n.cluster,eBIC=EBICklambda, lambda_eBIC=lambda_eBIC,Th.Pen= ret$res[[n.cluster]]$Theta_Pen[[lambda_index]],Th.NPen= ret$res[[n.cluster]]$Theta_NonPen[[lambda_index]],
-  Pi_ind=ret$res[[n.cluster]]$pi.ind[[lambda_index]],Pi=Pi,clusters=cl,Pen_LogLik=ret$res[[n.cluster]]$loglik[lambda_index], NPen_LogLik=ret$res[[n.cluster]]$naiveloglik[lambda_index],lambda=lambda)
+  output<-list(n.cluster=n.cluster,eBIC=EBICklambda, lambda.eBIC=lambda_eBIC,Th.Pen= ret$res[[n.cluster]]$Theta.Pen[[lambda_index]],Th.NPen= ret$res[[n.cluster]]$Theta.NonPen[[lambda_index]],
+  Pi.ind=ret$res[[n.cluster]]$pi.ind[[lambda_index]],Pi=Pi,clusters=cl,Pen.LogLik=ret$res[[n.cluster]]$loglik[lambda_index], NPen.LogLik=ret$res[[n.cluster]]$naiveloglik[lambda_index],lambda=lambda)
 
   class(output) <- "select.gm"
   return(output)
@@ -217,7 +217,7 @@ summary.select.gm<-function(object,...){
   lambda_eBIC<-object$lambda_eBIC
   clustering<-object$clusters
   mix_prop<-object$Pi
-  return.list<-list( mix_comp= mix_comp,lambda_eBIC=lambda_eBIC, clustering= clustering,mix_prop=mix_prop)
+  return.list<-list(mix.comp= mix_comp,lambda.eBIC=lambda_eBIC, clustering= clustering,mix.prop=mix_prop)
   return(return.list)
 }
 

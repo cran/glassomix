@@ -8,7 +8,7 @@
 \description{
 The main function perfoming the inference via EM algorithm. This function for each value 
 of K, estimate the responsibility matrices ( \eqn{n \times K}{n x K}) at the E-step 
-and then given these probabilities, estimate the precision matrices at the M-step 
+and then given these probabilities, estimates the precision matrices at the M-step 
 via glasso.
 }
 \usage{
@@ -23,7 +23,7 @@ glasso.mix(data,K=NULL,lambda=NULL,em.iter,n.lambda,
         columns = p, number of graph nodes/variables).
 }
   \item{K}{
- A sequence of integers denoting the numbers of mixture components (clusters) for which  EBIC is to be calculated. 
+ A sequence of integers denoting the numbers of mixture components (clusters).
  }
   \item{lambda}{
 (Non-negative) regularization parameter for glasso. lambda=0 means no regularization. It could be a scalar  or a vector. 
@@ -44,6 +44,7 @@ The Extended Bayesian Information Criteria paremeter, usually  ebic.gamma is bet
 The maximum number of K. 
 }
 }
+
 \details{
  Implements the EM algorithm for a parameterized Gaussian graphical mixture models accross K for each of the regularization parameters.
  
@@ -68,8 +69,7 @@ The details of the output components are as follows:
          }
                 
         \item{\code{bestlambda.ebic}}{
-             Optimal tuning parameter corresponding to each 
-             value of K.
+             Optimal tuning parameter corresponding to K.
          }
          
         \item{\code{besttheta.ebic}}{
@@ -79,28 +79,29 @@ The details of the output components are as follows:
          \item{\code{bestpi.ebic}}{
              The mixture proportion corresponding to the optimal EBIC for each value of K.
          }  
-        \item{\code{Theta_Pen}}{
-             All the individual penalized precision matrices corresponding to  each value of K 
+        \item{\code{Theta.Pen}}{
+              Penalized precision matrices corresponding to  each value of K 
              at the various regularization parameters.
          }
              
-        \item{\code{Theta_NonPen}}{
-             All the individual non-penalized precision matrices corresponding to  each value of K 
+        \item{\code{Theta.NonPen}}{
+           Non-penalized precision matrices corresponding to  each value of K 
              at the various regularization parameters.
          }
             
         \item{\code{pi.ind}}{
              Responsibility matrices ( \eqn{n \times K}{n x K}) corresponding to  each value of K for the various regularization parameters.
-             It can also be seen as vector of probabilities (\eqn{w^{(k)}_{i1},...,w^{(K)}_{iK}}{w^{(k)}_{i1},...,w^{(K)}_{iK}}) 
+             It can also be seen as vector of probabilities (\eqn{w_{i1},...,w_{iK}}{w_{i1},...,w_{iK}}) 
              of individual \eqn{i}{i} belonging to the \eqn{k}{k} classes at penalty  \eqn{\lambda}{lambda}.
          }
             
         \item{\code{pi}}{
-             K- Mixing coefficients  for the various regularization parameters.
+             K Mixing coefficients  for the various regularization parameters.
          }
              
         \item{\code{EBIC}}{
-             All EBIC values for each value of K.
+             All EBIC values for each value of K at the various regularization 
+             parameters.
          }   
          
                    
@@ -114,7 +115,7 @@ The details of the output components are as follows:
 }
 \references{
 1.  Anani, Lotsi. and E. Wit (2013). High dimensional sparse Gaussian graphical model.
-(to be published)
+(http://arxiv.org/abs/1308.3381)
 
 2.  Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
 Computations for the Graphical Lasso. \emph{Journal of Computational and Graphical Statistics}.

@@ -15,7 +15,7 @@ select.gm(ret)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ret}{
-It is a list which is the result of glasso.mix algorithm from  'glasso.mix' function.
+It is a list which is the result of glasso.mix algorithm from  ``glasso.mix'' function.
 }
 }
 \details{
@@ -24,22 +24,22 @@ Gaussian graphical mixture model accross K for each of the regularization parame
 }
 \value{
 The details of the output components are as follows:
-  \item{n.cluster }{Optimal number of clusters or mixture components  K.}
-  \item{eBIC }{All EBIC values. This is a matrix with row equals maximun number of mixtures minus one; (Kmax-1) and  column equals to n.lambda.}
-  \item{lambda_eBIC}{Optimum lambda value based on EBIC.}
-  \item{Th.Pen}{Optimum penalized K precision matrices.}
-  \item{Th.NPen}{Optimum non-penalized K precision matrices.}
-  \item{Pi_ind}{Optimum  responsibility matrices ( \eqn{n \times K}{n x K}) corresponding to the soft-K-means clustering.}
-  \item{Pi}{Optimum (K) mixture proportions  based on EBIC criterion.}
+  \item{n.cluster }{Optimal number of clusters or mixture components.}
+  \item{eBIC }{All EBIC values.}
+  \item{lambda.eBIC}{Optimum lambda value based on minimum EBIC.}
+  \item{Th.Pen}{``n.cluster'' penalized K precision matrices.}
+  \item{Th.NPen}{``n.cluster''  non-penalized K precision matrices.}
+  \item{Pi.ind}{Optimum  responsibility matrices ( \eqn{n \times K}{n x K}) corresponding to the soft-K-means clustering.}
+  \item{Pi}{Optimum  mixture proportions  based on EBIC criterion.}
   \item{clusters}{( \eqn{n \times 1}{n x 1}) vector containing the indices of the clusters where the data points are assigned to.}
-  \item{Pen_LogLik}{The un-penalized loglikelihood corresponding to the optimal EBIC.}
-  \item{NPen_LogLik}{The naive un-penalized loglikelihood corresponding to the optimal EBIC.}
+  \item{Pen.LogLik}{The un-penalized loglikelihood corresponding to the optimal EBIC.}
+  \item{NPen.LogLik}{The naive un-penalized loglikelihood corresponding to the optimal EBIC.}
   \item{lambda}{The sequence of regularization parameters used.}
    
 }
 \references{
-1.  Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
-(to be published)
+1.  Anani, Lotsi. and E. Wit (2013). High dimensional sparse Gaussian graphical model.
+(http://arxiv.org/abs/1308.3381)
 
 2.  Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
 Computations for the Graphical Lasso. \emph{Journal of Computational and Graphical Statistics}.

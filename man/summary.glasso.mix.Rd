@@ -29,7 +29,7 @@ It gives a reduced summary of output from  ``glasso.mix''.
 \value{
 The details of the output components are as follows:
  \item{lambda }{The sequence of regularization parameters.}
-  \item{Pi}{ Mixture proportions  for each K across lambda.}
+  \item{pi}{ Mixture proportions  for each K across lambda.}
   \item{bestlambda.ebic}{Optimum lambda value based on EBIC for each K.}
   \item{besttheta.ebic}{The penalized precision matrix corresponding to the optimal EBIC for each value of K.}
   \item{n.par}{Total number of estimated parameters in the precision matrices corresponding to each 
@@ -37,8 +37,8 @@ The details of the output components are as follows:
 }
 
 \references{
-1.  Anani, Lotsi. and E. Wit (2012). High dimensional sparse Gaussian graphical model.
-(to be published)
+1.  Anani, Lotsi. and E. Wit (2013). High dimensional sparse Gaussian graphical model.
+(http://arxiv.org/abs/1308.3381)
 
 2.  Witten, Daniela M. and Friedman, Jerome H. and Simon, Noah (2011). New Insights and Faster 
 Computations for the Graphical Lasso. \emph{Journal of Computational and Graphical Statistics}.
